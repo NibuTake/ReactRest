@@ -1,0 +1,42 @@
+version: "1.0"
+name: Pet Store Service
+config:
+  http:
+    baseURL: https://example.com
+tests:
+  default:
+    name: Default
+    steps:
+      - id: Pets_list
+        http:
+          url: /pets
+          method: GET
+          check:
+            status: 200
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Pet"
+components:
+  schemas:
+    Pet:
+      type: object
+      required:
+        - name
+        - age
+        - kind
+      properties:
+        name:
+          type: string
+          minLength: 100
+        age:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+        kind:
+          type: string
+          enum:
+            - dog
+            - cat
+            - fish
