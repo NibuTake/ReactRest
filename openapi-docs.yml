@@ -1,0 +1,41 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: My API
+  description: This is the API
+servers:
+  - url: v1
+components:
+  schemas: {}
+  parameters: {}
+paths:
+  /users/{id}:
+    get:
+      summary: Get a single user
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: id
+          in: path
+      responses:
+        "200":
+          description: Object with user data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+                    minLength: 1
+                  email:
+                    type: string
+                    format: email
+                required:
+                  - id
+                  - name
+                  - email
